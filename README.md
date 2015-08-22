@@ -2,7 +2,7 @@
 
 This is a simple express based web server that converts text messages passed in HTTP requests to speech.
 
-# Installation - Mac OS X
+### Installation - Mac OS X
 
 Prerequisites:
 - node and npm install and available on the path
@@ -16,5 +16,5 @@ $ ./start
 $ curl --user tushar:s3cr3t localhost:3000/speak/Hello%20World!
 ```
 
-# Installation - Raspberry Pi 2
+### Installation - Raspberry Pi 2
 Coming soon!
