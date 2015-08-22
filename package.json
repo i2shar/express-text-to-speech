@@ -1,0 +1,19 @@
+{
+  "name": "webserver",
+  "version": "1.0.0",
+  "description": "Home Automation Server",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Tushar Inamdar",
+  "license": "ISC",
+  "private": true,
+  "dependencies": {
+    "basic-auth": "^1.0.3",
+    "express": "^4.11.2",
+    "forever": "^0.14.1",
+    "winston": "^1.0.1"
+  }
+}

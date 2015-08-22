@@ -1,0 +1,7 @@
+#!/bin/bash
+
+BASE_DIR=`dirname $0`
+FOREVER_CMD=node_modules/forever/bin/forever
+
+cd ${BASE_DIR}
+$FOREVER_CMD stop app.js
