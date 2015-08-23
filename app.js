@@ -9,11 +9,10 @@ var logger = require('./lib/winston');
 app.use(basicAuth(config.basicAuth.username, config.basicAuth.password));
 
 app.use(function(req, res, next) {
-    next();
-    logRequest(req, res);
     res.type('text/plain; charset=utf-8');
     res.set("Connection", "close");
-    res.status(200).send("OK");
+    next();
+    logRequest(req, res);
 });
 
 app.get('/speak/:message/:lang?', function (req, res) {
@@ -22,6 +21,7 @@ app.get('/speak/:message/:lang?', function (req, res) {
 
     playSound(config.sounds.default);
     speak(language, message);
+    res.status(200).send("OK");
 });
 
 app.get('/speakOnly/:message/:lang?', function (req, res) {
@@ -29,6 +29,7 @@ app.get('/speakOnly/:message/:lang?', function (req, res) {
     var language = req.params.lang || 'en';
 
     speak(language, message);
+    res.status(200).send("OK");
 });
 
 app.get('/play/:file', function (req, res) {
@@ -36,6 +37,7 @@ app.get('/play/:file', function (req, res) {
     if (file) {
         playSound(file);
     }
+    res.status(200).send("OK");
 });
 
 app.use(function(err, req, res, next) {
