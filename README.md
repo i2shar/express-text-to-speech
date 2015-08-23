@@ -9,11 +9,11 @@ Prerequisites:
 - Speakers turned on
 
 ```sh
-$ git clone https://github.com/i2shar/express-text-to-speech.git
-$ cd express-text-to-speech/
-$ npm install
-$ bin/server start
-$ curl --user tushar:s3cr3t localhost:3000/speak/Hello%20World!
+git clone https://github.com/i2shar/express-text-to-speech.git
+cd express-text-to-speech/
+npm install
+bin/server start
+curl --user tushar:s3cr3t localhost:3000/speak/Hello%20World!
 ```
 
 ### Installation - Raspberry Pi 2
