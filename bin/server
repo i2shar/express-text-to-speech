@@ -31,7 +31,7 @@ function startServer() {
         exit;
     fi
 
-    FOREVER_ARGS="-m 1 -a --minUptime 5000 --spinSleepTime 5000 -l ${LOG_DIR}/forever.log -o ${LOG_DIR}/out.log -e ${LOG_DIR}/err.log --pidFile ${PID_FILE}"
+    FOREVER_ARGS="-m 1 -a --minUptime 5000 --spinSleepTime 5000 -p ${LOG_DIR} -l forever.log -o ${LOG_DIR}/out.log -e ${LOG_DIR}/err.log --pidFile ${PID_FILE}"
     cd ${BASE_DIR}
     ${FOREVER_CMD} ${FOREVER_ARGS} start --uid 'express-tts-server' app.js
 }
