@@ -14,6 +14,7 @@ cd express-text-to-speech/
 npm install
 bin/server start
 curl --user tushar:s3cr3t localhost:3000/speak/Hello%20World!
+echo Did you hear it?
 ```
 
 ### Installation - Raspberry Pi 2
