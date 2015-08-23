@@ -1,5 +1,20 @@
 #!/bin/bash
 
+BIN_DIR=`dirname $0`
+BASE_DIR=${BIN_DIR}/..
+LOG_DIR_NAME=log
+FOREVER_CMD=node_modules/forever/bin/forever
+PID_FILE_NAME=speech.pid
+cd ${BASE_DIR}
+
+
+function print_env() {
+    echo ${BIN_DIR}
+    echo ${BASE_DIR}
+    echo ${LOG_DIR_NAME}
+    echo ${FOREVER_CMD}
+    echo ${PID_FILE_NAME}
+}
 
 function print_usage() {
     echo "Usage: server command"
@@ -7,44 +22,25 @@ function print_usage() {
     echo "  start               starts the server"
     echo "  stop                stops the server"
     echo "  status              prints the status"
+    echo "  env                 prints the environment"
 
-}
-
-function setEnv() {
-    BIN_DIR=`dirname $0`
-    BASE_DIR=${BIN_DIR}/..
-    LOG_DIR=${BASE_DIR}/log
-    FOREVER_CMD=node_modules/forever/bin/forever
-    PID_FILE=${BASE_DIR}/speech.pid
 }
 
 
 function startServer() {
-    setEnv
-
-    if [[ ! -e ${LOG_DIR} ]]; then
-        mkdir ${LOG_DIR}
+    if [[ ! -e ${LOG_DIR_NAME} ]]; then
+        mkdir ${LOG_DIR_NAME}
     fi
 
-    if [ -f ${PID_FILE} ]; then
-        echo Server already seems to be running. If not, remove ${PID_FILE} and try again
-        exit;
-    fi
-
-    FOREVER_ARGS="-m 1 -a --minUptime 5000 --spinSleepTime 5000 -p ${LOG_DIR} -l forever.log -o ${LOG_DIR}/out.log -e ${LOG_DIR}/err.log --pidFile ${PID_FILE}"
-    cd ${BASE_DIR}
+    FOREVER_ARGS="-m 1 -a --minUptime 5000 --spinSleepTime 5000 -p . -l log/forever.log -o log/out.log -e log/err.log"
     ${FOREVER_CMD} ${FOREVER_ARGS} start --uid 'express-tts-server' app.js
 }
 
 function stopServer() {
-    setEnv
-    cd ${BASE_DIR}
     ${FOREVER_CMD} stop app.js
 }
 
 function printStatus() {
-    setEnv
-    cd ${BASE_DIR}
     ${FOREVER_CMD} list
 }
 
@@ -60,6 +56,11 @@ case ${COMMAND} in
 
     start)
         startServer
+        exit
+    ;;
+
+    env)
+        print_env
         exit
     ;;
 
