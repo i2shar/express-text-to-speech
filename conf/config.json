@@ -1,7 +1,14 @@
 {
-  "playCommand": "afplay",
-  "speakCommand": "speak",
-  "speakHindiCommand": "speak -v Lekha",
+
+  "sounds": {
+    "default" : "soft_chime.mp3"
+  },
+
+  "commands" : {
+    "play": "afplay",
+    "speak": "speak",
+    "speakHindi": "speak -v Lekha"
+  },
 
   "basicAuth" : {
     "username" : "tushar",

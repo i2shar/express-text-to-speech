@@ -20,7 +20,7 @@ app.get('/speak/:message/:lang?', function (req, res) {
     var message = req.params.message;
     var language = req.params.lang || 'en';
 
-    playSound('soft_chime.mp3');
+    playSound(config.sounds.default);
     speak(language, message);
 });
 
@@ -44,7 +44,7 @@ app.use(function(err, req, res, next) {
 });
 
 function playSound(file) {
-    execProcess(config.playCommand + ' sounds/' + file);
+    execProcess(config.commands.play + ' sounds/' + file);
 }
 
 function speak(language, message) {
@@ -52,11 +52,11 @@ function speak(language, message) {
     // message needs to be passed in quotes, so that quotes is messages are handled correctly
     switch (language) {
         case 'hi':
-            execProcess(config.speakHindiCommand + " \"" + message + "\"");
+            execProcess(config.commands.speakHindi + " \"" + message + "\"");
             break;
         case 'en':
         default:
-            execProcess(config.speakCommand + " \"" + message + "\"");
+            execProcess(config.commands.speak + " \"" + message + "\"");
             break;
     }
 }
