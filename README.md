@@ -1,6 +1,6 @@
-# Express text-to-speech web server
+# Express text-to-speech server
 
-This is a simple express based web server that converts text messages passed in HTTP requests to speech.
+This is a simple express based server that converts text messages passed in HTTP requests to speech.
 
 ### Installation - Mac OS X
 
