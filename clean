@@ -1,6 +1,0 @@
-#!/bin/bash
-
-rm err.log
-rm forever.log
-rm out.log
-rm webserver.log

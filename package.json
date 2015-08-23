@@ -1,5 +1,5 @@
 {
-  "name": "webserver",
+  "name": "express-tts-server",
   "version": "1.0.0",
   "description": "Home Automation Server",
   "main": "app.js",
@@ -8,7 +8,7 @@
     "start": "node app.js"
   },
   "author": "Tushar Inamdar",
-  "license": "ISC",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "basic-auth": "^1.0.3",

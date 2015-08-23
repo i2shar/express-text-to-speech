@@ -1,0 +1,88 @@
+#!/bin/bash
+
+
+function print_usage() {
+    echo "Usage: server command"
+    echo "where command is one of:"
+    echo "  start               starts the server"
+    echo "  stop                stops the server"
+    echo "  status              prints the status"
+
+}
+
+function setEnv() {
+    BIN_DIR=`dirname $0`
+    BASE_DIR=${BIN_DIR}/..
+    LOG_DIR=${BASE_DIR}/log
+    FOREVER_CMD=node_modules/forever/bin/forever
+    PID_FILE=${BASE_DIR}/speech.pid
+}
+
+
+function startServer() {
+    setEnv
+
+    if [[ ! -e ${LOG_DIR} ]]; then
+        mkdir ${LOG_DIR}
+    fi
+
+    if [ -f ${PID_FILE} ]; then
+        echo Server already seems to be running. If not, remove ${PID_FILE} and try again
+        exit;
+    fi
+
+    FOREVER_ARGS="-m 1 -a --minUptime 5000 --spinSleepTime 5000 -l ${LOG_DIR}/forever.log -o ${LOG_DIR}/out.log -e ${LOG_DIR}/err.log --pidFile ${PID_FILE}"
+    cd ${BASE_DIR}
+    ${FOREVER_CMD} ${FOREVER_ARGS} start --uid 'express-tts-server' app.js
+}
+
+function stopServer() {
+    setEnv
+    cd ${BASE_DIR}
+    ${FOREVER_CMD} stop app.js
+}
+
+function printStatus() {
+    setEnv
+    cd ${BASE_DIR}
+    ${FOREVER_CMD} list
+}
+
+if [ $# = 0 ]; then
+    print_usage
+    exit
+fi
+
+
+COMMAND=$1
+
+case ${COMMAND} in
+
+    start)
+        startServer
+        exit
+    ;;
+
+    stop)
+        stopServer
+        exit
+    ;;
+
+    status)
+        printStatus
+        exit
+    ;;
+
+    restart)
+        stopServer
+        startServer
+    ;;
+
+    *)
+        print_usage
+        exit
+    ;;
+
+esac
+
+

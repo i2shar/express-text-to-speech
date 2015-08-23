@@ -1,8 +1,0 @@
-#!/bin/bash
-
-BASE_DIR=`dirname $0`
-FOREVER_CMD=node_modules/forever/bin/forever
-
-cd ${BASE_DIR}
-$FOREVER_CMD -m 1 -a --minUptime 5000 --spinSleepTime 5000  -l $BASE_DIR/forever.log -o $BASE_DIR/out.log -e $BASE_DIR/err.log --pidFile $BASE_DIR/speech.pid start app.js
-

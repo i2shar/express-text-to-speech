@@ -1,0 +1,10 @@
+{
+  "playCommand": "afplay",
+  "speakCommand": "speak",
+  "speakHindiCommand": "speak -v Lekha",
+
+  "basicAuth" : {
+    "username" : "tushar",
+    "password" : "s3cr3t"
+  }
+}
