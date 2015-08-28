@@ -11,6 +11,7 @@
   },
 
   "basicAuth" : {
+    "enabled"  : false,
     "username" : "tushar",
     "password" : "s3cr3t"
   }

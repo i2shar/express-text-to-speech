@@ -6,7 +6,9 @@ var config = require('./conf/config');
 
 var logger = require('./lib/winston');
 
-app.use(basicAuth(config.basicAuth.username, config.basicAuth.password));
+if(config.basicAuth.enabled) {
+    app.use(basicAuth(config.basicAuth.username, config.basicAuth.password));
+}
 
 app.use(function(req, res, next) {
     res.type('text/plain; charset=utf-8');
