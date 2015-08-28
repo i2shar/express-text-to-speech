@@ -28,7 +28,7 @@ function print_usage() {
 
 
 function startServer() {
-    if [[ ! -e ${LOG_DIR_NAME} ]]; then
+    if [ ! -e ${LOG_DIR_NAME} ]; then
         mkdir ${LOG_DIR_NAME}
     fi
 
@@ -59,11 +59,6 @@ case ${COMMAND} in
         exit
     ;;
 
-    env)
-        print_env
-        exit
-    ;;
-
     stop)
         stopServer
         exit
@@ -77,6 +72,11 @@ case ${COMMAND} in
     restart)
         stopServer
         startServer
+    ;;
+
+    env)
+        print_env
+        exit
     ;;
 
     *)
