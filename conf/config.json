@@ -1,4 +1,5 @@
 {
+  "port" : 80,
 
   "sounds": {
     "default" : "soft_chime.mp3"
@@ -11,8 +12,16 @@
   },
 
   "basicAuth" : {
-    "enabled"  : false,
+    "enabled"  : true,
     "username" : "tushar",
     "password" : "s3cr3t"
+  },
+
+  "ssl" : {
+    "tip" : "Use LetsEncrypt.org to get free SSL certificates for your site",
+    "enabled" : false,
+    "port" : 443,
+    "cert" : "cert/cert.pem",
+    "key" : "cert/privkey.pem"
   }
 }

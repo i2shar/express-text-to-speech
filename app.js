@@ -1,16 +1,19 @@
 var express = require('express');
 var app = express();
+var https = require('https');
+var http = require('http');
+var fs = require('fs');
 var child_process = require('child_process');
 var basicAuth = require('./lib/auth').basicAuth;
 var config = require('./conf/config');
 
 var logger = require('./lib/winston');
 
-if(config.basicAuth.enabled) {
+if (config.basicAuth.enabled) {
     app.use(basicAuth(config.basicAuth.username, config.basicAuth.password));
 }
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.type('text/plain; charset=utf-8');
     res.set("Connection", "close");
     next();
@@ -42,7 +45,7 @@ app.get('/play/:file', function (req, res) {
     res.status(200).send("OK");
 });
 
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
     logger.error(err.stack);
     res.status(500).send('Something broke!');
 });
@@ -74,11 +77,30 @@ function execProcess(command) {
 }
 
 
-var server = app.listen(3000, function () {
+if (config.ssl.enabled) {
+    var options = {
+        key: fs.readFileSync(config.ssl.key),
+        cert: fs.readFileSync(config.ssl.cert)
+    };
 
-    var host = server.address().address;
-    var port = server.address().port;
+    https.createServer(options, app).listen(config.ssl.port);
 
-    logger.info('Example app listening at http://%s:%s', host, port);
+    http.createServer(function (req, res) {
+        var hostname = ( req.headers.host.match(/:/g) ) ? req.headers.host.slice( 0, req.headers.host.indexOf(":") ) : req.headers.host;
+        logger.info(hostname);
+        var location = "https://" + hostname + ":" + config.ssl.port + req.url;
+        logger.info(location);
+        res.writeHead(301, {"Location": location});
+        res.end();
+    }).listen(config.port);
 
-});
+} else {
+    var server = app.listen(config.port, function () {
+
+        var host = server.address().address;
+        var port = server.address().port;
+
+        logger.info('Example app listening at http://%s:%s', host, port);
+
+    });
+}
