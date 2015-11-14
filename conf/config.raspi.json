@@ -1,0 +1,27 @@
+{
+  "port" : 80,
+
+  "sounds": {
+    "default" : "soft_chime.mp3"
+  },
+
+  "commands" : {
+    "play": "omxplayer -o local",
+    "speak": "google_speech",
+    "speakHindi": "speak -v Lekha"
+  },
+
+  "basicAuth" : {
+    "enabled"  : false,
+    "username" : "tushar",
+    "password" : "s3cr3t"
+  },
+
+  "ssl" : {
+    "tip" : "Use LetsEncrypt.org to get free SSL certificates for your site",
+    "enabled" : true,
+    "port" : 443,
+    "cert" : "cert/cert.pem",
+    "key" : "cert/privkey.pem"
+  }
+}
