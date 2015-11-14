@@ -1,5 +1,5 @@
 {
-  "port" : 80,
+  "port" : 3000,
 
   "sounds": {
     "default" : "soft_chime.mp3"
@@ -8,7 +8,7 @@
   "commands" : {
     "play": "omxplayer -o local",
     "speak": "google_speech",
-    "speakHindi": "speak -v Lekha"
+    "speakHindi": "google_speech -l hi"
   },
 
   "basicAuth" : {
