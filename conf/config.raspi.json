@@ -19,7 +19,7 @@
 
   "ssl" : {
     "tip" : "Use LetsEncrypt.org to get free SSL certificates for your site",
-    "enabled" : true,
+    "enabled" : false,
     "port" : 443,
     "cert" : "cert/cert.pem",
     "key" : "cert/privkey.pem"
