@@ -39,3 +39,7 @@ Then execute
 ```sh
 curl --user tushar:s3cr3t localhost:3000/speak/Hello%20World!
 ```
+
+### Configuration
+
+Edit conf/config.json to configure authentication, SSL, sounds, ports and commands
