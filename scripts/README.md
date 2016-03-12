@@ -18,13 +18,6 @@ Edit the contents of /etc/init.d/tts_server to match the contents of startup_scr
 sudo update-rc.d /etc/init.d/tts_server defaults
 ```
 
-If you've installed node and other binaries locally (local to a user), you will need to create symlinks to it in the /usr/bin directories
-
-```sh
-sudo ln -s /home/pi/node5/bin/node /usr/bin/
-sudo ln -s /usr/local/bin/google_speech /usr/bin/
-```
-
 And finally, restart
 
 ```sh
