@@ -17,30 +17,31 @@ fi
 # Author: Tushar
 #
 
+HOME=/home/pi
 SERVER_HOME=/home/pi/webserver
 USER=pi
-EXEC=su - ${USER} -c ${SERVER_HOME}/bin/server
+export HOME USER SERVER_HOME
 
 case "$1" in 
     start)
         echo "Starting TTS Server"
-        ${EXEC} start
+        su - ${USER} ${SERVER_HOME}/bin/server start
         ;;
     stop)
         echo "Stopping TTS Server"
-        ${EXEC} start
+        su - ${USER} ${SERVER_HOME}/bin/server stop
         ;;
     restart)
         echo "Restarting TTS Server"
-        ${EXEC} stop
-        ${EXEC} start
+        su - ${USER} ${SERVER_HOME}/bin/server stop
+        su - ${USER} ${SERVER_HOME}/bin/server start
         ;;
     status)
         echo "Status of TTS Server..."
-        ${EXEC} status
+        su - ${USER} ${SERVER_HOME}/bin/server status
         ;;
     *)
-        ${EXEC}
+        su - ${USER} ${SERVER_HOME}/bin/server
         ;;
 esac
 
