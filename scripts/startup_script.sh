@@ -18,7 +18,8 @@ fi
 #
 
 SERVER_HOME=/home/pi/webserver
-EXEC=${SERVER_HOME}/bin/server
+USER=pi
+EXEC=su - ${USER} -c ${SERVER_HOME}/bin/server
 
 case "$1" in 
     start)

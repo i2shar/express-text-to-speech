@@ -20,6 +20,18 @@ app.use(function (req, res, next) {
     logRequest(req, res);
 });
 
+app.get('/', function (req, res) {
+    res.status(200).send("Nothing here. Go away.");
+});
+
+app.get('/announce/:key', function (req, res) {
+    var file = req.params.key + '.' + config.messages.extension;
+
+    playSound(config.sounds.default);
+    playMessage(file);
+    res.status(200).send("OK");
+});
+
 app.get('/speak/:message/:lang?', function (req, res) {
     var message = req.params.message;
     var language = req.params.lang || 'en';
@@ -52,6 +64,10 @@ app.use(function (err, req, res, next) {
 
 function playSound(file) {
     execProcess(config.commands.play + ' sounds/' + file);
+}
+
+function playMessage(file) {
+    execProcess(config.commands.play + ' messages/' + file);
 }
 
 function speak(language, message) {
